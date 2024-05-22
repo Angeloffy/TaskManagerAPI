@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "tasks"
+version = "0.1.0"
+description = "Tasks FlaskAPI"
+authors = ["angeloffy"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.0.3"
+flask-swagger-ui = "^4.11.1"
+sqlalchemy = "^2.0.30"
+mysql = "^0.0.3"
+python-dotenv = "^1.0.1"
+apispec = "^6.6.1"
+marshmallow = "^3.21.2"
+pymysql = "^1.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
