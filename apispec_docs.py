@@ -20,7 +20,10 @@ def get_apispec(app):
         operations={
             "post": {
                 "responses": {
-                    "201": {"description": "Created", "schema": {"$ref": "#/components/schemas/Task"}}
+                    "201": {
+                        "description": "Created",
+                        "schema": {"$ref": "#/components/schemas/Task"},
+                    }
                 },
                 "summary": "Create a new task",
                 "requestBody": {
@@ -29,9 +32,9 @@ def get_apispec(app):
                             "schema": {"$ref": "#/components/schemas/Task"}
                         }
                     }
-                }
+                },
             }
-        }
+        },
     )
 
     spec.path(
@@ -42,18 +45,21 @@ def get_apispec(app):
                 "in": "path",
                 "required": True,
                 "schema": {"type": "integer"},
-                "description": "ID of the task"
+                "description": "ID of the task",
             }
         ],
         operations={
             "get": {
                 "responses": {
-                    "200": {"description": "OK", "schema": {"$ref": "#/components/schemas/Task"}},
-                    "404": {"description": "Task not found"}
+                    "200": {
+                        "description": "OK",
+                        "schema": {"$ref": "#/components/schemas/Task"},
+                    },
+                    "404": {"description": "Task not found"},
                 },
-                "summary": "Get a task by ID"
+                "summary": "Get a task by ID",
             }
-        }
+        },
     )
 
     spec.path(
@@ -61,12 +67,17 @@ def get_apispec(app):
         operations={
             "get": {
                 "responses": {
-                    "200": {"description": "OK",
-                            "schema": {"type": "array", "items": {"$ref": "#/components/schemas/Task"}}}
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {"$ref": "#/components/schemas/Task"},
+                        },
+                    }
                 },
-                "summary": "Get all tasks"
+                "summary": "Get all tasks",
             }
-        }
+        },
     )
 
     spec.path(
@@ -77,18 +88,18 @@ def get_apispec(app):
                 "in": "path",
                 "required": True,
                 "schema": {"type": "integer"},
-                "description": "ID of the task to delete"
+                "description": "ID of the task to delete",
             }
         ],
         operations={
             "delete": {
                 "responses": {
                     "200": {"description": "OK"},
-                    "404": {"description": "Task not found"}
+                    "404": {"description": "Task not found"},
                 },
-                "summary": "Delete a task by ID"
+                "summary": "Delete a task by ID",
             }
-        }
+        },
     )
 
     spec.path(
@@ -99,15 +110,18 @@ def get_apispec(app):
                 "in": "path",
                 "required": True,
                 "schema": {"type": "integer"},
-                "description": "ID of the task"
+                "description": "ID of the task",
             }
         ],
         operations={
             "put": {
                 "responses": {
-                    "200": {"description": "OK", "schema": {"$ref": "#/components/schemas/Task"}},
+                    "200": {
+                        "description": "OK",
+                        "schema": {"$ref": "#/components/schemas/Task"},
+                    },
                     "400": {"description": "Bad Request"},
-                    "404": {"description": "Task not found"}
+                    "404": {"description": "Task not found"},
                 },
                 "summary": "Update a task by ID",
                 "requestBody": {
@@ -116,9 +130,9 @@ def get_apispec(app):
                             "schema": {"$ref": "#/components/schemas/TaskSchema_update"}
                         }
                     }
-                }
+                },
             }
-        }
+        },
     )
 
     return spec

@@ -1,11 +1,11 @@
-from flask import jsonify
-from flask import Flask
+from flask import Flask, jsonify
 from flask_swagger_ui import get_swaggerui_blueprint
 
 from apispec_docs import get_apispec
 from database.engine import create_tables
-from routers import create_task, get_tasksID, get_tasks, update_tasks, delete_tasks
 from middleware import db_session_middleware
+from routers import (create_task, delete_tasks, get_tasks, get_tasksID,
+                     update_tasks)
 
 # Создание экземпляра Flask приложения
 app = Flask(__name__)
@@ -24,24 +24,20 @@ create_tables()
 
 
 # Маршрут для доступа к спецификации Swagger
-@app.route('/swagger')
+@app.route("/swagger")
 def swagger_spec():
     spec = get_apispec(app).to_dict()
     return jsonify(spec)
 
 
-SWAGGER_URL = '/docs'
-API_URL = '/swagger'
+SWAGGER_URL = "/docs"
+API_URL = "/swagger"
 
 swagger_ui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL,
-    API_URL,
-    config={
-        'app_name': 'Tasks API'
-    }
+    SWAGGER_URL, API_URL, config={"app_name": "Tasks API"}
 )
 
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

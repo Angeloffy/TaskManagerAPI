@@ -1,6 +1,8 @@
-from sqlalchemy.orm import Session
-from database.models import Task
 from typing import List
+
+from sqlalchemy.orm import Session
+
+from database.models import Task
 
 
 def orm_create_task(db: Session, title: str, description: str = None) -> Task:
@@ -28,7 +30,9 @@ def orm_get_all_tasks(db: Session) -> List[Task]:
     return db.query(Task).all()
 
 
-def orm_update_task(db: Session, task_id: int, title: str = None, description: str = None) -> Task:
+def orm_update_task(
+    db: Session, task_id: int, title: str = None, description: str = None
+) -> Task:
     """
     Обновление задачи по идентификатору.
     """

@@ -1,4 +1,5 @@
 import pytest
+
 from app import app as flask_app
 
 
@@ -14,11 +15,8 @@ def client(app):
 
 def test_create_task(client):
     # Проверка создания новой задачи
-    task_data = {
-        "title": "Test Task",
-        "description": "This is a test task"
-    }
-    response = client.post('/tasks', json=task_data)
+    task_data = {"title": "Test Task", "description": "This is a test task"}
+    response = client.post("/tasks", json=task_data)
     # Проверка успешного создания задачи
     assert response.status_code == 201
 
@@ -35,15 +33,12 @@ def test_create_task(client):
 
 def test_get_task_by_id(client):
     # Проверка получения информации о задаче по идентификатору
-    task_data = {
-        "title": "Test Task",
-        "description": "This is a test task"
-    }
-    response = client.post('/tasks', json=task_data)
+    task_data = {"title": "Test Task", "description": "This is a test task"}
+    response = client.post("/tasks", json=task_data)
     assert response.status_code == 201
     task_id = response.json["id"]
 
-    response = client.get(f'/tasks/{task_id}')
+    response = client.get(f"/tasks/{task_id}")
     # Проверка успешного получения информации о задаче
     assert response.status_code == 200
     # Проверка наличия необходимых полей в ответе
@@ -57,19 +52,16 @@ def test_get_task_by_id(client):
 
 def test_update_task(client):
     # Проверка обновления задачи
-    task_data = {
-        "title": "Test Task",
-        "description": "This is a test task"
-    }
-    response = client.post('/tasks', json=task_data)
+    task_data = {"title": "Test Task", "description": "This is a test task"}
+    response = client.post("/tasks", json=task_data)
     assert response.status_code == 201
     task_id = response.json["id"]
 
     updated_task_data = {
         "title": "Updated Test Task",
-        "description": "This is an updated test task"
+        "description": "This is an updated test task",
     }
-    response = client.put(f'/tasks/{task_id}', json=updated_task_data)
+    response = client.put(f"/tasks/{task_id}", json=updated_task_data)
     # Проверка успешного обновления задачи
     assert response.status_code == 200
 
@@ -86,27 +78,24 @@ def test_update_task(client):
 
 def test_delete_task(client):
     # Проверка удаления задачи
-    task_data = {
-        "title": "Test Task",
-        "description": "This is a test task"
-    }
-    response = client.post('/tasks', json=task_data)
+    task_data = {"title": "Test Task", "description": "This is a test task"}
+    response = client.post("/tasks", json=task_data)
     assert response.status_code == 201
     task_id = response.json["id"]
 
     # Удаляем задачу
-    response = client.delete(f'/tasks/{task_id}')
+    response = client.delete(f"/tasks/{task_id}")
     # Проверка успешного удаления задачи
     assert response.status_code == 200
 
-    response = client.get(f'/tasks/{task_id}')
+    response = client.get(f"/tasks/{task_id}")
     # Проверка, что задача больше не доступна
     assert response.status_code == 404
 
 
 def test_get_all_tasks(client):
     # Проверка получения списка всех задач
-    response = client.get('/tasks')
+    response = client.get("/tasks")
     assert response.status_code == 200
     response_data = response.json
     # Проверка формата и содержания списка задач

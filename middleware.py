@@ -1,4 +1,5 @@
 from flask import g
+
 from database.engine import SessionLocal
 
 
@@ -9,7 +10,7 @@ def db_session_middleware(app):
 
     @app.teardown_request
     def close_session(exception=None):
-        session = g.pop('db_session', None)
+        session = g.pop("db_session", None)
         if session is not None:
             if exception is None:
                 session.commit()
