@@ -1,12 +1,10 @@
 from flask import Blueprint, jsonify, g
 from database.crud import orm_get_task_by_id
 from database.engine import SessionLocal
-from schemas import TaskSchema
-
-
+from schemas import task_schema
 
 bp = Blueprint('get_task', __name__)
-task_schema = TaskSchema()
+
 
 @bp.route('/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
