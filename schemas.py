@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, validate, ValidationError
+from marshmallow import Schema, fields, validate
 
 
 class TaskSchema(Schema):
@@ -15,3 +15,6 @@ class TaskSchema_update(Schema):
     description = fields.Str(required=False)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
+
+
+task_schema = TaskSchema()

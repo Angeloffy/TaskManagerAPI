@@ -2,12 +2,11 @@ from flask import Blueprint, request, jsonify, g
 
 from database.crud import orm_create_task
 from database.engine import SessionLocal
-from schemas import TaskSchema
+from schemas import task_schema
 from marshmallow import ValidationError
 
 
 bp = Blueprint('add_task', __name__)
-task_schema = TaskSchema()
 
 
 @bp.route('/tasks', methods=['POST'])
